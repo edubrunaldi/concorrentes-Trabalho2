@@ -1,30 +1,17 @@
-#include "smoof.h"
+#include "smooth.h"
 
 
-int menuNodes(){
-    int n_nodes;
-    do{
-        cout << "\n\n\n";
-        cout << "Digite o numero de nodes que deseja utilizar no programa: " << "\n";
-        cout << " 2 - Cria 2 nodes\n";
-        cout << " 3 - Cria 3 nodes\n";
-        cout << " 4 - Cria 4 nodes\n";
-        cout << "> ";
-        cin >> n_nodes;
-    }while(n_nodes < 2 || n_nodes > 4);
-    return n_nodes;
-}
 
 int menuThreads(){
     int n_threads;
     do{
-        cout << "\n\n\n";
-        cout << "Digite o numero de threads que deseja utilizar no programa: " << "\n";
-        cout << " 2 - Cria 2 threads\n";
-        cout << " 3 - Cria 3 threads\n";
-        cout << " 4 - Cria 4 threads\n";
-        cout << "> ";
-        cin >> n_threads;
+        std::cout << "\n\n\n";
+        std::cout << "Digite o numero de threads que deseja utilizar no programa: " << "\n";
+        std::cout << " 2 - Cria 2 threads\n";
+        std::cout << " 3 - Cria 3 threads\n";
+        std::cout << " 4 - Cria 4 threads\n";
+        std::cout << "> ";
+        std::cin >> n_threads;
     }while(n_threads < 2 || n_threads > 4);
     return n_threads;
 }
@@ -33,43 +20,43 @@ int main(){
 
     int opcao;
     int n_threads;
-    int n_nodes;
     //char* nome_imagem = (char*) malloc(512*sizeof(char));
-    char *nome_imagem = new char[512];
-    nome.   
-    cout << "V2.0-----Concorrentes-----\n" ;
-    cout << "Eduardo Brunaldi dos Santos & Igor de Souza Baliza\n";
-    cout << "\n\n\n";
+    //char *nome_imagem = new char[512];   
+    //char *nome_saida = new char[512];   
+    std::string nome_imagem;
+    std::string nome_saida;
+    std::cout << "V2.0-----Concorrentes-----\n" ;
+    std::cout << "Eduardo Brunaldi dos Santos & Igor de Souza Baliza\n";
+    std::cout << "\n\n\n";
     do{
-        cout << "Menu Principal:\n"; 
-        cout << "    1- Executar sequencial\n"; 
-        cout << "    2- Executar concorrente\n";
-        cout << "    0- Sair\n";
-        cout << "Digite uma das opcoes: ";
-        cin >> opcao;
+        std::cout << "Menu Principal:\n"; 
+        std::cout << "    1- Executar sequencial\n"; 
+        std::cout << "    2- Executar concorrente\n";
+        std::cout << "    0- Sair\n";
+        std::cout << "Digite uma das opcoes: ";
+        std::cin >> opcao;
 
         switch (opcao){
             case 0:
-                cout << "Fechando  o programa!\n"; 
+                std::cout << "Fechando  o programa!\n"; 
                 break;
             case 1:
-                cout << "Nome da Imagem: ";
-                cin >> nome_imagem;
-                sequencial(nome_imagem);
+                std::cout << "Nome da Imagem: ";
+                std::cin >> nome_imagem;
+                std::cout << "Nome da Saida: ";
+                std::cin >> nome_saida;
+                sequencialColorido(nome_imagem, nome_saida);
                 break;
             case 2:
-                cout << "Nome da Imagem: ";
-                cin >> nome_imagem;
+                std::cout << "Nome da Imagem: ";
+                std::cin >> nome_imagem;
                 n_threads = menuThreads();
-                n_nodes = menuNodes();
-                concorrente(nome_imagem, n_threads, n_nodes);
+                concorrente(nome_imagem, n_threads);
                 break;
             default:
-                cout << "Opcao invalida, selecione outra opcao.\n"; 
+                std::cout << "Opcao invalida, selecione outra opcao.\n"; 
         }
     }while(opcao !=0);
-    
-    free(nome_imagem);
 
     return 0;
 }

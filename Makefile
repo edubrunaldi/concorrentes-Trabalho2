@@ -1,7 +1,7 @@
-all:	smoof.o
-	g++ -o main smoof.o main.cpp 'pkg-config --cflags --libs opencv'
-smoof.o:
-	g++ -c smoof.cpp
+all:	smooth.o
+	g++ -Wall -g -o main smooth.o main.cpp `pkg-config --libs opencv`
+smooth.o:
+	g++ -Wall -c smooth.cpp
 clean:
 	rm *.o main
 run:
