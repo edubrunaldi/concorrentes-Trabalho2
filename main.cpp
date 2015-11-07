@@ -18,7 +18,7 @@ int menuThreads(){
 
 int main(){
 
-    int opcao;
+    int opcao=0, opcao_cor=0;
     int n_threads;
     //char* nome_imagem = (char*) malloc(512*sizeof(char));
     //char *nome_imagem = new char[512];   
@@ -36,6 +36,13 @@ int main(){
         std::cout << "Digite uma das opcoes: ";
         std::cin >> opcao;
 
+        do{
+            std::cout << "Escolha o tipo de Imagem:\n";
+            std::cout << "1 - RGB\n";
+            std::cout << "2 - Grayscale\n";
+            std::cin >> opcao_cor;
+        }while(opcao_cor < 1 || opcao_cor > 2);
+
         switch (opcao){
             case 0:
                 std::cout << "Fechando  o programa!\n"; 
@@ -45,7 +52,10 @@ int main(){
                 std::cin >> nome_imagem;
                 std::cout << "Nome da Saida: ";
                 std::cin >> nome_saida;
-                sequencialColorido(nome_imagem, nome_saida);
+                if(opcao_cor == 1)
+                    sequencialColorido(nome_imagem, nome_saida);
+                else
+                    sequencialCinza(nome_imagem, nome_saida);
                 break;
             case 2:
                 std::cout << "Nome da Imagem: ";
