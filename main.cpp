@@ -36,6 +36,7 @@ int main(){
     int n_nodes;
     //char* nome_imagem = (char*) malloc(512*sizeof(char));
     char *nome_imagem = new char[512];
+    nome.   
     cout << "V2.0-----Concorrentes-----\n" ;
     cout << "Eduardo Brunaldi dos Santos & Igor de Souza Baliza\n";
     cout << "\n\n\n";
