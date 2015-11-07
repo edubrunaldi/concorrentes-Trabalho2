@@ -2,29 +2,29 @@
 
 
 int menuNodes(){
-    int n_threads;
+    int n_nodes;
     do{
-        printf("\n\n\n");
-        printf("Digite o numero de nodes que deseja utilizar no programa: \n");
-        printf(" 2 - Utiliza 2 nodes\n");
-        printf(" 3 - Utiliza 3 nodes\n");
-        printf(" 4 - Utiliza 4 nodes\n");
-        printf("> ");
-        scanf("%d", &n_threads);
-    }while(n_threads < 2 || n_threads > 4);
-    return n_threads;
+        cout << "\n\n\n";
+        cout << "Digite o numero de nodes que deseja utilizar no programa: " << "\n";
+        cout << " 2 - Cria 2 nodes\n";
+        cout << " 3 - Cria 3 nodes\n";
+        cout << " 4 - Cria 4 nodes\n";
+        cout << "> ";
+        cin >> n_nodes;
+    }while(n_nodes < 2 || n_nodes > 4);
+    return n_nodes;
 }
 
 int menuThreads(){
     int n_threads;
     do{
-        printf("\n\n\n");
-        printf("Digite o numero de threads que deseja utilizar no programa: \n");
-        printf(" 2 - Cria 2 threads\n");
-        printf(" 3 - Cria 3 threads\n");
-        printf(" 4 - Cria 4 threads\n");
-        printf("> ");
-        scanf("%d", &n_threads);
+        cout << "\n\n\n";
+        cout << "Digite o numero de threads que deseja utilizar no programa: " << "\n";
+        cout << " 2 - Cria 2 threads\n";
+        cout << " 3 - Cria 3 threads\n";
+        cout << " 4 - Cria 4 threads\n";
+        cout << "> ";
+        cin >> n_threads;
     }while(n_threads < 2 || n_threads > 4);
     return n_threads;
 }
@@ -33,36 +33,42 @@ int main(){
 
     int opcao;
     int n_threads;
-    char* nome_imagem = malloc(512*sizeof(char));
-    printf("V2.0-----Concorrentes-----\n");
-    printf("Eduardo Brunaldi dos Santos & Igor de Souza Baliza\n"); 
-    printf("\n\n\n");
+    int n_nodes;
+    //char* nome_imagem = (char*) malloc(512*sizeof(char));
+    char *nome_imagem = new char[512];
+    cout << "V2.0-----Concorrentes-----\n" ;
+    cout << "Eduardo Brunaldi dos Santos & Igor de Souza Baliza\n";
+    cout << "\n\n\n";
     do{
-        printf("Menu Principal:\n");
-        printf("    1- Executar sequencial\n");
-        printf("    2- Executar concorrente\n");
-        printf("    0- Sair\n");
-        printf("Digite uma das opcoes: ");
-        scanf("%d",&opcao);
+        cout << "Menu Principal:\n"; 
+        cout << "    1- Executar sequencial\n"; 
+        cout << "    2- Executar concorrente\n";
+        cout << "    0- Sair\n";
+        cout << "Digite uma das opcoes: ";
+        cin >> opcao;
 
         switch (opcao){
             case 0:
-                printf("Fechando  o programa!\n");
+                cout << "Fechando  o programa!\n"; 
                 break;
             case 1:
-                 scanf("%s",nome_imagem);
+                cout << "Nome da Imagem: ";
+                cin >> nome_imagem;
                 sequencial(nome_imagem);
                 break;
             case 2:
-                scanf("%s",nome_imagem);
+                cout << "Nome da Imagem: ";
+                cin >> nome_imagem;
                 n_threads = menuThreads();
                 n_nodes = menuNodes();
                 concorrente(nome_imagem, n_threads, n_nodes);
                 break;
             default:
-                printf("Opcao invalida, selecione outra opcao.\n");
+                cout << "Opcao invalida, selecione outra opcao.\n"; 
         }
     }while(opcao !=0);
+    
+    free(nome_imagem);
 
     return 0;
 }
