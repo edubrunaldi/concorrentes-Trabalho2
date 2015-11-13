@@ -1,28 +1,9 @@
 #include "smooth.h"
 
 
-
-int menuThreads(){
-    int n_threads;
-    do{
-        std::cout << "\n\n\n";
-        std::cout << "Digite o numero de threads que deseja utilizar no programa: " << "\n";
-        std::cout << " 2 - Cria 2 threads\n";
-        std::cout << " 3 - Cria 3 threads\n";
-        std::cout << " 4 - Cria 4 threads\n";
-        std::cout << "> ";
-        std::cin >> n_threads;
-    }while(n_threads < 2 || n_threads > 4);
-    return n_threads;
-}
-
 int main(){
 
     int opcao=0, opcao_cor=0;
-    int n_threads;
-    //char* nome_imagem = (char*) malloc(512*sizeof(char));
-    //char *nome_imagem = new char[512];   
-    //char *nome_saida = new char[512];   
     std::string nome_imagem;
     std::string nome_saida;
     std::cout << "V2.0-----Concorrentes-----\n" ;
@@ -43,15 +24,16 @@ int main(){
             std::cin >> opcao_cor;
         }while(opcao_cor < 1 || opcao_cor > 2);
 
+        std::cout << "Nome da Imagem: ";
+        std::cin >> nome_imagem;
+        std::cout << "Nome da Saida: ";
+        std::cin >> nome_saida;
+
         switch (opcao){
             case 0:
                 std::cout << "Fechando  o programa!\n"; 
                 break;
             case 1:
-                std::cout << "Nome da Imagem: ";
-                std::cin >> nome_imagem;
-                std::cout << "Nome da Saida: ";
-                std::cin >> nome_saida;
                 if(opcao_cor == 1)
                     sequencialColorido(nome_imagem, nome_saida);
                 else
@@ -60,8 +42,10 @@ int main(){
             case 2:
                 std::cout << "Nome da Imagem: ";
                 std::cin >> nome_imagem;
-                n_threads = menuThreads();
-                concorrente(nome_imagem, n_threads);
+                if(opcao_cor == 1)
+                    concorrenteCinza(nome_imagem, nome_saida);
+                else
+                    concorrenteRGB(nome_imagem, nome_saida);
                 break;
             default:
                 std::cout << "Opcao invalida, selecione outra opcao.\n"; 
