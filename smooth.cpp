@@ -82,9 +82,21 @@ void sequencialColorido(std::string nome_imagem, std::string imagem_saida){//cha
     tempo =( ((double) ( ((end.tv_sec * 1000000 + end.tv_usec)
                                 - (start.tv_sec * 1000000 + start.tv_usec))))/1000000);
 
-    printf("%lf", tempo);
+    printf("\n foi aqui 1\n");
+    char nome[100];
+    sprintf(nome, "saida/rgb/%s.out", imagem_saida.c_str());
+    printf("\n foi aqui 2\n");
+    FILE *fp = NULL;
+    printf("\n foi aqui 3\n");
+    if(!(fp = fopen(nome, "w")))
+    {
+        printf("ERRO DE ARQUIVO\n");
+    }
+    fprintf(fp, "%lf", tempo);
+    printf("\n foi aqui 4\n");
     //apresentar os resultado
-
+    fclose(fp);
+    printf("\n foi aqui 5\n");
     cv::imwrite(imagem_saida, img_saida);
 }
 
@@ -158,7 +170,11 @@ void sequencialCinza(std::string nome_imagem, std::string imagem_saida){
     tempo =( ((double) ( ((end.tv_sec * 1000000 + end.tv_usec)
                                 - (start.tv_sec * 1000000 + start.tv_usec))))/1000000);
 
-    printf("%lf", tempo);
+    char nome[100];
+    sprintf(nome, "%s.out", imagem_saida.c_str());
+    FILE *fp = fopen(nome, "w");
+    fprintf(fp, "%lf", tempo);
+    fclose(fp);
     //apresentar os resultado
 
     cv::imwrite(imagem_saida, img_saida);
