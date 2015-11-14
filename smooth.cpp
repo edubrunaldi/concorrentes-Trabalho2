@@ -198,6 +198,13 @@ void calculaConCinza(unsigned char *img, unsigned char *img_saida, int i, int j,
 void concorrenteCinza(std::string nome_imagem, std::string imagem_saida){//char *nome_imagem, int n_threads){
     int node;
     int num_slaves;
+
+    /*comeco de calcular tempo*/
+    struct timeval start,end;
+    double tempo=0.0;
+    gettimeofday(&start,NULL);
+
+
     MPI_Init(NULL, NULL); 
     MPI_Comm_rank(MPI_COMM_WORLD, &node); 
     MPI_Comm_size(MPI_COMM_WORLD, &num_slaves);
@@ -307,6 +314,16 @@ void concorrenteCinza(std::string nome_imagem, std::string imagem_saida){//char 
     }
 
     MPI_Finalize();
+
+    gettimeofday(&end,NULL);
+    tempo =( ((double) ( ((end.tv_sec * 1000000 + end.tv_usec)
+                                - (start.tv_sec * 1000000 + start.tv_usec))))/1000000);
+
+    char nome[100];
+    sprintf(nome, "%s.out", imagem_saida.c_str());
+    FILE *fp = fopen(nome, "w");
+    fprintf(fp, "%lf", tempo);
+    fclose(fp);
     
 
 }
@@ -332,6 +349,12 @@ void calculaConRGB(unsigned char *img, unsigned char *img_saida, int i, int j, i
 void concorrenteColorido(std::string nome_imagem, std::string imagem_saida){
     int node;
     int num_slaves;
+
+    /*comeco de calcular tempo*/
+    struct timeval start,end;
+    double tempo=0.0;
+    gettimeofday(&start,NULL);
+
     MPI_Init(NULL, NULL); 
     MPI_Comm_rank(MPI_COMM_WORLD, &node); 
     MPI_Comm_size(MPI_COMM_WORLD, &num_slaves);
@@ -441,4 +464,15 @@ void concorrenteColorido(std::string nome_imagem, std::string imagem_saida){
     }
 
     MPI_Finalize();
+
+
+    gettimeofday(&end,NULL);
+    tempo =( ((double) ( ((end.tv_sec * 1000000 + end.tv_usec)
+                                - (start.tv_sec * 1000000 + start.tv_usec))))/1000000);
+
+    char nome[100];
+    sprintf(nome, "%s.out", imagem_saida.c_str());
+    FILE *fp = fopen(nome, "w");
+    fprintf(fp, "%lf", tempo);
+    fclose(fp);
 }
