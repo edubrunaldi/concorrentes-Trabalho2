@@ -79,7 +79,7 @@ void sequencialColorido(std::string nome_imagem, std::string imagem_saida){//cha
 
 
 
-void calculaCinza(unsigned char **img, unsigned char **img_saida, int i, int j, int top, int botton, int left, int right)
+void calculaCinza(cv::Mat img, cv::Mat img_saida, int i, int j, int top, int botton, int left, int right)
 {
     unsigned int media = 0;
     for(int rows = top; rows < botton; ++rows)
