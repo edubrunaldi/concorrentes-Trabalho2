@@ -84,7 +84,7 @@ void sequencialColorido(std::string nome_imagem, std::string imagem_saida){//cha
 
     printf("\n foi aqui 1\n");
     char nome[100];
-    sprintf(nome, "saida/rgb/%s.out", imagem_saida.c_str());
+    sprintf(nome, "%s.out", imagem_saida.c_str());
     printf("\n foi aqui 2\n");
     FILE *fp = NULL;
     printf("\n foi aqui 3\n");
@@ -264,6 +264,6 @@ void concorrenteCinza(std::string nome_imagem, std::string imagem_saida){//char 
 
 }
 */
-void concorrenteRGB(std::string nome_imagem, std::string imagem_saida){
+void concorrenteColorido(std::string nome_imagem, std::string imagem_saida){
     
 }

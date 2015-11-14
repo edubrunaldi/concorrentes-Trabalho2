@@ -22,13 +22,10 @@ int main(){
             std::cout << "Escolha o tipo de Imagem:\n";
             std::cout << "1 - RGB\n";
             std::cout << "2 - Grayscale\n";
+            std::cout << "Digite uma das opcoes: ";
             std::cin >> opcao_cor;
         }while(opcao_cor < 1 || opcao_cor > 2);
 
-        std::cout << "Nome da Imagem: ";
-        std::cin >> nome_imagem;
-        std::cout << "Nome da Saida: ";
-        std::cin >> nome_saida;
 
         switch (opcao){
             case 0:
@@ -36,15 +33,27 @@ int main(){
                 break;
             case 1:
                 if(opcao_cor == 1)
-                    sequencialColorido(nome_imagem, nome_saida);
+                    sequencialColorido("rgb/1.jpg", "saida/seq/rgb/1.jpg");
+                    sequencialColorido("rgb/2.jpg", "saida/seq/rgb/2.jpg");
+                    sequencialColorido("rgb/3.jpg", "saida/seq/rgb/3.jpg");
+                    sequencialColorido("rgb/4.jpg", "saida/seq/rgb/4.jpg");
                 else
-                    sequencialCinza(nome_imagem, nome_saida);
+                    sequencialCinza("gray/1.jpg", "saida/seq/gray/1.jpg");
+                    sequencialCinza("gray/2.jpg", "saida/seq/gray/2.jpg");
+                    sequencialCinza("gray/3.jpg", "saida/seq/gray/3.jpg");
+                    sequencialCinza("gray/4.jpg", "saida/seq/gray/4.jpg");
                 break;
             case 2:
                 if(opcao_cor == 1)
-                    concorrenteCinza(nome_imagem, nome_saida);
+                    concorrenteColorido("rgb/1.jpg", "saida/conc/rgb/1.jpg");
+                    concorrenteColorido("rgb/2.jpg", "saida/conc/rgb/2.jpg");
+                    concorrenteColorido("rgb/3.jpg", "saida/conc/rgb/3.jpg");
+                    concorrenteColorido("rgb/4.jpg", "saida/conc/rgb/4.jpg");
                 else
-                    concorrenteRGB(nome_imagem, nome_saida);
+                    concorrenteCinza("gray/1.jpg", "saida/conc/gray/1.jpg");
+                    concorrenteCinza("gray/2.jpg", "saida/conc/gray/2.jpg");
+                    concorrenteCinza("gray/3.jpg", "saida/conc/gray/3.jpg");
+                    concorrenteCinza("gray/4.jpg", "saida/conc/gray/4.jpg");
                 break;
             default:
                 std::cout << "Opcao invalida, selecione outra opcao.\n"; 

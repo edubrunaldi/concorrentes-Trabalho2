@@ -24,7 +24,7 @@ void sequencialColorido(std::string nome_imagem, std::string imagem_saida);
 void calculaCinza(cv::Mat img, cv::Mat img_saida, int i, int j, int top, int botton, int left, int right);
 void sequencialCinza(std::string nome_imagem, std::string imagem_saida);
 void concorrenteCinza(std::string nome_imagem, std::string imagem_saida);
-void concorrenteRGB(std::string nome_imagem, std::string imagem_saida);
+void concorrenteColorido(std::string nome_imagem, std::string imagem_saida);
 
 
 #endif
