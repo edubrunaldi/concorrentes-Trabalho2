@@ -7,6 +7,7 @@
 #include <opencv/ml.h>
 #include <opencv/cxcore.h>
 #include <opencv/highgui.h>
+#include <sys/time.h>
 //#include <omp.h>
 //#include <ctime>
 //#include <mpi.h>
