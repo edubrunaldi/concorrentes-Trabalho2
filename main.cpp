@@ -32,28 +32,30 @@ int main(){
                 std::cout << "Fechando  o programa!\n"; 
                 break;
             case 1:
-                if(opcao_cor == 1)
+               if(opcao_cor == 1){
                     sequencialColorido("rgb/1.jpg", "saida/seq/rgb/1.jpg");
                     sequencialColorido("rgb/2.jpg", "saida/seq/rgb/2.jpg");
                     sequencialColorido("rgb/3.jpg", "saida/seq/rgb/3.jpg");
                     sequencialColorido("rgb/4.jpg", "saida/seq/rgb/4.jpg");
-                else
+                }else{
                     sequencialCinza("gray/1.jpg", "saida/seq/gray/1.jpg");
                     sequencialCinza("gray/2.jpg", "saida/seq/gray/2.jpg");
                     sequencialCinza("gray/3.jpg", "saida/seq/gray/3.jpg");
                     sequencialCinza("gray/4.jpg", "saida/seq/gray/4.jpg");
+                }
                 break;
             case 2:
-                if(opcao_cor == 1)
+                if(opcao_cor == 1){
                     concorrenteColorido("rgb/1.jpg", "saida/conc/rgb/1.jpg");
                     concorrenteColorido("rgb/2.jpg", "saida/conc/rgb/2.jpg");
                     concorrenteColorido("rgb/3.jpg", "saida/conc/rgb/3.jpg");
                     concorrenteColorido("rgb/4.jpg", "saida/conc/rgb/4.jpg");
-                else
+                }else{
                     concorrenteCinza("gray/1.jpg", "saida/conc/gray/1.jpg");
                     concorrenteCinza("gray/2.jpg", "saida/conc/gray/2.jpg");
                     concorrenteCinza("gray/3.jpg", "saida/conc/gray/3.jpg");
                     concorrenteCinza("gray/4.jpg", "saida/conc/gray/4.jpg");
+                }
                 break;
             default:
                 std::cout << "Opcao invalida, selecione outra opcao.\n"; 
