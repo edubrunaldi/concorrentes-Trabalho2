@@ -7,10 +7,15 @@
 #include <opencv/ml.h>
 #include <opencv/cxcore.h>
 #include <opencv/highgui.h>
-//#include <omp.h>
+#include <omp.h>
 //#include <ctime>
-//#include <mpi.h>
- 
+#include <mpi.h>
+
+
+#define PAI 0
+#define INICIO 0
+#define MEIO 1
+#define FIM 2
 //using namespace std;
 
 void calculaRGB(cv::Mat img, cv::Mat img_saida, int i, int j, int top, int botton, int left, int right);
