@@ -16,7 +16,8 @@ int main(){
         std::cout << "    0- Sair\n";
         std::cout << "Digite uma das opcoes: ";
         std::cin >> opcao;
-
+        if (opcao==0)
+            break;
         do{
             std::cout << "Escolha o tipo de Imagem:\n";
             std::cout << "1 - RGB\n";
@@ -40,8 +41,6 @@ int main(){
                     sequencialCinza(nome_imagem, nome_saida);
                 break;
             case 2:
-                std::cout << "Nome da Imagem: ";
-                std::cin >> nome_imagem;
                 if(opcao_cor == 1)
                     concorrenteCinza(nome_imagem, nome_saida);
                 else

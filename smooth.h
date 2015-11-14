@@ -7,9 +7,9 @@
 #include <opencv/ml.h>
 #include <opencv/cxcore.h>
 #include <opencv/highgui.h>
-#include <omp.h>
+//#include <omp.h>
 //#include <ctime>
-#include <mpi.h>
+//#include <mpi.h>
 
 
 #define PAI 0
@@ -22,7 +22,8 @@ void calculaRGB(cv::Mat img, cv::Mat img_saida, int i, int j, int top, int botto
 void sequencialColorido(std::string nome_imagem, std::string imagem_saida);
 void calculaCinza(cv::Mat img, cv::Mat img_saida, int i, int j, int top, int botton, int left, int right);
 void sequencialCinza(std::string nome_imagem, std::string imagem_saida);
-void concorrente(std::string nome_imagem, int n_threads);
+void concorrenteCinza(std::string nome_imagem, std::string imagem_saida);
+void concorrenteRGB(std::string nome_imagem, std::string imagem_saida);
 
 
 #endif

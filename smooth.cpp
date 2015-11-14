@@ -98,51 +98,52 @@ void sequencialCinza(std::string nome_imagem, std::string imagem_saida){
     cv::Mat img = cv::imread(nome_imagem);
     cv::Mat img_saida(img.rows, img.cols, CV_8UC1);
     //canto superior esquerdo
-    calculaCinza(img.data, img_saida.data, 0, 0, 0, 3, 0, 3);
-    calculaCinza(img.data, img_saida.data, 0, 1, 0, 3, 0, 4);
-    calculaCinza(img.data, img_saida.data, 1, 0, 0, 4, 0, 3);
-    calculaCinza(img.data, img_saida.data, 1, 1, 0, 4, 0, 4);
+    calculaCinza(img, img_saida, 0, 0, 0, 3, 0, 3);
+    calculaCinza(img, img_saida, 0, 1, 0, 3, 0, 4);
+    calculaCinza(img, img_saida, 1, 0, 0, 4, 0, 3);
+    calculaCinza(img, img_saida, 1, 1, 0, 4, 0, 4);
     //canto superior direito
-    calculaCinza(img.data, img_saida.data, 0, img.cols-1, 0, 3, img.cols-3, img.cols);
-    calculaCinza(img.data, img_saida.data, 0, img.cols-2, 0, 3, img.cols-4, img.cols);
-    calculaCinza(img.data, img_saida.data, 1, img.cols-1, 0, 4, img.cols-3, img.cols);
-    calculaCinza(img.data, img_saida.data, 1, img.cols-2, 0, 4, img.cols-4, img.cols);
+    calculaCinza(img, img_saida, 0, img.cols-1, 0, 3, img.cols-3, img.cols);
+    calculaCinza(img, img_saida, 0, img.cols-2, 0, 3, img.cols-4, img.cols);
+    calculaCinza(img, img_saida, 1, img.cols-1, 0, 4, img.cols-3, img.cols);
+    calculaCinza(img, img_saida, 1, img.cols-2, 0, 4, img.cols-4, img.cols);
     //canto inferior esquerdo
-    calculaCinza(img.data, img_saida.data, img.rows-1, 0, img.rows-3, img.rows, 0, 3);
-    calculaCinza(img.data, img_saida.data, img.rows-1, 1, img.rows-3, img.rows, 0, 4);
-    calculaCinza(img.data, img_saida.data, img.rows-2, 0, img.rows-4, img.rows, 0, 3);
-    calculaCinza(img.data, img_saida.data, img.rows-2, 1, img.rows-4, img.rows, 0, 4);
+    calculaCinza(img, img_saida, img.rows-1, 0, img.rows-3, img.rows, 0, 3);
+    calculaCinza(img, img_saida, img.rows-1, 1, img.rows-3, img.rows, 0, 4);
+    calculaCinza(img, img_saida, img.rows-2, 0, img.rows-4, img.rows, 0, 3);
+    calculaCinza(img, img_saida, img.rows-2, 1, img.rows-4, img.rows, 0, 4);
     //canto inferior direito
-    calculaCinza(img.data, img_saida.data, img.rows-1, img.cols-1, img.rows-3, img.rows, img.cols-3, img.cols);
-    calculaCinza(img.data, img_saida.data, img.rows-1, img.cols-2, img.rows-3, img.rows, img.cols-4, img.cols);
-    calculaCinza(img.data, img_saida.data, img.rows-2, img.cols-1, img.rows-4, img.rows, img.cols-3, img.cols);
-    calculaCinza(img.data, img_saida.data, img.rows-2, img.cols-2, img.rows-4, img.rows, img.cols-4, img.cols);
+    calculaCinza(img, img_saida, img.rows-1, img.cols-1, img.rows-3, img.rows, img.cols-3, img.cols);
+    calculaCinza(img, img_saida, img.rows-1, img.cols-2, img.rows-3, img.rows, img.cols-4, img.cols);
+    calculaCinza(img, img_saida, img.rows-2, img.cols-1, img.rows-4, img.rows, img.cols-3, img.cols);
+    calculaCinza(img, img_saida, img.rows-2, img.cols-2, img.rows-4, img.rows, img.cols-4, img.cols);
     
     for(int j = 2; j < img.cols-2; ++j)
     {
-        calculaCinza(img.data, img_saida.data, 0, j, 0, 2, j-2, j+2);//primeira linha
-        calculaCinza(img.data, img_saida.data, 1, j, 0, 3, j-2, j+2);//segunda linha
-        calculaCinza(img.data, img_saida.data, img.rows-2, j, img.rows-4, img.rows, j-2, j+2);//penultima linha
-        calculaCinza(img.data, img_saida.data, img.rows-1, j, img.rows-3, img.rows, j-2, j+2);//ultima linha
+        calculaCinza(img, img_saida, 0, j, 0, 2, j-2, j+2);//primeira linha
+        calculaCinza(img, img_saida, 1, j, 0, 3, j-2, j+2);//segunda linha
+        calculaCinza(img, img_saida, img.rows-2, j, img.rows-4, img.rows, j-2, j+2);//penultima linha
+        calculaCinza(img, img_saida, img.rows-1, j, img.rows-3, img.rows, j-2, j+2);//ultima linha
     }
     for(int i=2 ; i<img.rows-2 ; ++i){
         //executar o codigo
-        calculaCinza(img.data,img_saida.data, i, 0, i-2,i+2,0,3);//primeira coluna
-        calculaCinza(img.data,img_saida.data, i, 1, i-2,i+2,0,4);//segunda coluna
+        calculaCinza(img,img_saida, i, 0, i-2,i+2,0,3);//primeira coluna
+        calculaCinza(img,img_saida, i, 1, i-2,i+2,0,4);//segunda coluna
         for(int j=2; j<img.cols-2; ++j)//miolo da imagem
         {
-            calculaCinza(img.data,img_saida.data, i, j, i-2,i+2,j-2,j+2);
+            calculaCinza(img,img_saida, i, j, i-2,i+2,j-2,j+2);
         }
-        calculaCinza(img.data,img_saida.data, i, img.cols-2, i-2,i+2,img.cols-4,img.cols);//penultima coluna
-        calculaCinza(img.data,img_saida.data, i, img.cols-1, i-2,i+2,img.cols-3,img.cols);//ultima coluna
+        calculaCinza(img,img_saida, i, img.cols-2, i-2,i+2,img.cols-4,img.cols);//penultima coluna
+        calculaCinza(img,img_saida, i, img.cols-1, i-2,i+2,img.cols-3,img.cols);//ultima coluna
     }
     //apresentar os resultado
 
     cv::imwrite(imagem_saida, img_saida);
 }
 
-
-
+void concorrenteCinza(std::string nome_imagem, std::string imagem_saida){//char *nome_imagem, int n_threads){
+}
+/*
 void concorrenteCinza(std::string nome_imagem, std::string imagem_saida){//char *nome_imagem, int n_threads){
     int node;
     int num_slaves;
@@ -222,4 +223,8 @@ void concorrenteCinza(std::string nome_imagem, std::string imagem_saida){//char 
     MPI_Finalize();
     
 
+}
+*/
+void concorrenteRGB(std::string nome_imagem, std::string imagem_saida){
+    
 }
