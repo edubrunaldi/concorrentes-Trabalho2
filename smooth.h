@@ -23,6 +23,7 @@ void calculaRGB(cv::Mat img, cv::Mat img_saida, int i, int j, int top, int botto
 void sequencialColorido(std::string nome_imagem, std::string imagem_saida);
 void calculaCinza(cv::Mat img, cv::Mat img_saida, int i, int j, int top, int botton, int left, int right);
 void sequencialCinza(std::string nome_imagem, std::string imagem_saida);
+void calculaConCinza(unsigned char *img, unsigned char *img_saida, int i, int j, int top, int botton, int left, int right, int width);
 void concorrenteCinza(std::string nome_imagem, std::string imagem_saida);
 void concorrenteColorido(std::string nome_imagem, std::string imagem_saida);
 
