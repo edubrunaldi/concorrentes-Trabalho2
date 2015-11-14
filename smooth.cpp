@@ -79,7 +79,7 @@ void sequencialColorido(std::string nome_imagem, std::string imagem_saida){//cha
 
 
 
-void calculaCinza(cv::Mat img, cv::Mat img_saida, int i, int j, int top, int botton, int left, int right)
+void calculaCinza(unsigned char **img, unsigned char **img_saida, int i, int j, int top, int botton, int left, int right)
 {
     unsigned int media = 0;
     for(int rows = top; rows < botton; ++rows)
@@ -199,14 +199,14 @@ void concorrenteCinza(std::string nome_imagem, std::string imagem_saida){//char 
         for (int i = 2; i < linhas-2; ++i)
         {
             //executar o codigo
-            calculaCinza(img_entrada,img_saida, i, 0, i-2,i+2,0,3);//primeira coluna
-            calculaCinza(img_entrada,img_saida, i, 1, i-2,i+2,0,4);//segunda coluna
+            calculaCinza(img_entrada,img_saida, i-2, 0, i-2,i+2,0,3);//primeira coluna
+            calculaCinza(img_entrada,img_saida, i-2, 1, i-2,i+2,0,4);//segunda coluna
             for(int j=2; j<img.cols-2; ++j)//miolo da imagem
             {
-                calculaCinza(img_entrada,img_saida, i, j, i-2,i+2,j-2,j+2);
+                calculaCinza(img_entrada,img_saida, i-2, j, i-2,i+2,j-2,j+2);
             }
-            calculaCinza(img_entrada,img_saida, i, img.cols-2, i-2,i+2,img.cols-4,img.cols);//penultima coluna
-            calculaCinza(img_entrada,img_saida, i, img.cols-1, i-2,i+2,img.cols-3,img.cols);//ultima coluna
+            calculaCinza(img_entrada,img_saida, i-2, img.cols-2, i-2,i+2,img.cols-4,img.cols);//penultima coluna
+            calculaCinza(img_entrada,img_saida, i-2, img.cols-1, i-2,i+2,img.cols-3,img.cols);//ultima coluna
         }
 
         linhas -= 4;
