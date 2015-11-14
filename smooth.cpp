@@ -33,6 +33,11 @@ void sequencialColorido(std::string nome_imagem, std::string imagem_saida){//cha
     //cout << "nome da imagem: " << nome_imagem << "\n";
     cv::Mat img = cv::imread(nome_imagem);
     cv::Mat img_saida(img.rows, img.cols, CV_8UC3);
+
+    struct timeval start,end;
+    double tempo=0.0;
+    gettimeofday(&start,NULL);
+
     //canto superior esquerdo
     calculaRGB(img, img_saida, 0, 0, 0, 3, 0, 3);
     calculaRGB(img, img_saida, 0, 1, 0, 3, 0, 4);
@@ -72,6 +77,12 @@ void sequencialColorido(std::string nome_imagem, std::string imagem_saida){//cha
         calculaRGB(img,img_saida, i, img.cols-2, i-2,i+2,img.cols-4,img.cols);//penultima coluna
         calculaRGB(img,img_saida, i, img.cols-1, i-2,i+2,img.cols-3,img.cols);//ultima coluna
     }
+
+    gettimeofday(&end,NULL);
+    tempo =( ((double) ( ((end.tv_sec * 1000000 + end.tv_usec)
+                                - (start.tv_sec * 1000000 + start.tv_usec))))/1000000);
+
+    printf("%lf", tempo);
     //apresentar os resultado
 
     cv::imwrite(imagem_saida, img_saida);
@@ -97,6 +108,12 @@ void sequencialCinza(std::string nome_imagem, std::string imagem_saida){
     //cout << "nome da imagem: " << nome_imagem << "\n";
     cv::Mat img = cv::imread(nome_imagem);
     cv::Mat img_saida(img.rows, img.cols, CV_8UC1);
+
+    struct timeval start,end;
+    double tempo=0.0;
+    gettimeofday(&start,NULL);
+
+
     //canto superior esquerdo
     calculaCinza(img, img_saida, 0, 0, 0, 3, 0, 3);
     calculaCinza(img, img_saida, 0, 1, 0, 3, 0, 4);
@@ -136,6 +153,12 @@ void sequencialCinza(std::string nome_imagem, std::string imagem_saida){
         calculaCinza(img,img_saida, i, img.cols-2, i-2,i+2,img.cols-4,img.cols);//penultima coluna
         calculaCinza(img,img_saida, i, img.cols-1, i-2,i+2,img.cols-3,img.cols);//ultima coluna
     }
+
+    gettimeofday(&end,NULL);
+    tempo =( ((double) ( ((end.tv_sec * 1000000 + end.tv_usec)
+                                - (start.tv_sec * 1000000 + start.tv_usec))))/1000000);
+
+    printf("%lf", tempo);
     //apresentar os resultado
 
     cv::imwrite(imagem_saida, img_saida);
