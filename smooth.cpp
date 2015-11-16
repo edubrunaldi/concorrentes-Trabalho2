@@ -13,6 +13,7 @@
 */
 void calculaRGB(cv::Mat img, cv::Mat img_saida, int i, int j, int top, int botton, int left, int right)
 {
+    //calcula media dos pixels
     unsigned int media[3] = {0,0,0};
     for(int rows = top; rows < botton; ++rows)
     {
@@ -23,12 +24,18 @@ void calculaRGB(cv::Mat img, cv::Mat img_saida, int i, int j, int top, int botto
             media[2] += img.at<cv::Vec3b>(rows,cols)[2];
         }
     }
+    //salva novo valor ao pixel
     int qtd = (botton-top)*(right-left);
     img_saida.at<cv::Vec3b>(i, j)[0] = (unsigned char)(media[0]/qtd);
     img_saida.at<cv::Vec3b>(i, j)[1] = (unsigned char)(media[1]/qtd);
     img_saida.at<cv::Vec3b>(i, j)[2] = (unsigned char)(media[2]/qtd);
 }
 
+
+/*
+    string nome_imagem = nome da imagem de entrada
+    string imagem_saida = nome da imagem de saida
+*/
 void sequencialColorido(std::string nome_imagem, std::string imagem_saida){//char *nome_imagem, char *imagem_saida){
     //cout << "nome da imagem: " << nome_imagem << "\n";
     cv::Mat img = cv::imread(nome_imagem);
@@ -78,25 +85,39 @@ void sequencialColorido(std::string nome_imagem, std::string imagem_saida){//cha
         calculaRGB(img,img_saida, i, img.cols-1, i-2,i+2,img.cols-3,img.cols);//ultima coluna
     }
 
+    //calcula o tempo
     gettimeofday(&end,NULL);
     tempo =( ((double) ( ((end.tv_sec * 1000000 + end.tv_usec)
                                 - (start.tv_sec * 1000000 + start.tv_usec))))/1000000);
 
+    //abre o arquivo , salva o tempo de execucao  e fecha o arquivo
     char nome[100];
     sprintf(nome, "%s.out", imagem_saida.c_str());
     FILE *fp = NULL;
     fp = fopen(nome, "w");
    
     fprintf(fp, "%lf", tempo);
-    //apresentar os resultado
     fclose(fp);
+
+    // salva imagem alterada
     cv::imwrite(imagem_saida, img_saida);
 }
 
-
+/*
+    Parametros:
+                Mat img = imagem de entrada
+                Mat saida = imagem de saida
+                int i = linha da imagem
+                int j = coluna da imagem
+                int top = limite superior
+                int botton = limite inferior
+                int left = limite a esquerda
+                int right = limite a direita
+*/
 
 void calculaCinza(cv::Mat img, cv::Mat img_saida, int i, int j, int top, int botton, int left, int right)
 {
+    //calcula media dos pixels
     unsigned int media = 0;
     for(int rows = top; rows < botton; ++rows)
     {
@@ -105,15 +126,22 @@ void calculaCinza(cv::Mat img, cv::Mat img_saida, int i, int j, int top, int bot
             media += img.at<cv::Vec3b>(rows,cols)[0];
         }
     }
+    //salva novo valor ao pixel
     int qtd = (botton-top)*(right-left);
     img_saida.at<uchar>(i, j) = (unsigned char)(media/qtd);
 }
 
+
+/*
+    string nome_imagem = nome da imagem de entrada
+    string imagem_saida = nome da imagem de saida
+*/
 void sequencialCinza(std::string nome_imagem, std::string imagem_saida){
     //cout << "nome da imagem: " << nome_imagem << "\n";
     cv::Mat img = cv::imread(nome_imagem);
     cv::Mat img_saida(img.rows, img.cols, CV_8UC1);
 
+    // inicio do tempo de execucao
     struct timeval start,end;
     double tempo=0.0;
     gettimeofday(&start,NULL);
@@ -159,23 +187,35 @@ void sequencialCinza(std::string nome_imagem, std::string imagem_saida){
         calculaCinza(img,img_saida, i, img.cols-1, i-2,i+2,img.cols-3,img.cols);//ultima coluna
     }
 
+    // fim do tempo de execucao
     gettimeofday(&end,NULL);
     tempo =( ((double) ( ((end.tv_sec * 1000000 + end.tv_usec)
                                 - (start.tv_sec * 1000000 + start.tv_usec))))/1000000);
 
+    //abre o arquivo , salva o tempo de execucao  e fecha o arquivo
     char nome[100];
     sprintf(nome, "%s.out", imagem_saida.c_str());
     FILE *fp = fopen(nome, "w");
     fprintf(fp, "%lf", tempo);
     fclose(fp);
-    //apresentar os resultado
-
+    // salva imagem alterada
     cv::imwrite(imagem_saida, img_saida);
 }
 
-
+/*
+    Parametros:
+                unsigned char img = vetor com cor da imagem de entrada
+                unsigned char saida = vetor com a cor da imagem de saida
+                int i = linha da imagem
+                int j = coluna da imagem
+                int top = limite superior
+                int botton = limite inferior
+                int left = limite a esquerda
+                int right = limite a direita
+*/
 void calculaConCinza(unsigned char *img, unsigned char *img_saida, int i, int j, int top, int botton, int left, int right, int width)
 {
+    //calcula media dos pixels
     unsigned int media = 0;
     for(int rows = top; rows < botton; ++rows)
     {
@@ -184,11 +224,19 @@ void calculaConCinza(unsigned char *img, unsigned char *img_saida, int i, int j,
             media += img[(rows*width)+cols];
         }
     }
+
+    //salva imagem no vetor da imagem
     int qtd = (botton-top)*(right-left);
     img_saida[(i*width)+j] = (unsigned char)(media/qtd);
 }
 
-void concorrenteCinza(std::string nome_imagem, std::string imagem_saida){//char *nome_imagem, int n_threads){
+/*
+    string nome_imagem = nome da imagem de entrada
+    string imagem_saida = nome da imagem de saida
+    int argc = numero de parametros passados
+    char argv = argumentos passados por parametros
+*/
+void concorrenteCinza(std::string nome_imagem, std::string imagem_saida,  int argc, char *argv[]){//char *nome_imagem, int n_threads){
     int node;
     int num_slaves;
 
@@ -309,10 +357,12 @@ void concorrenteCinza(std::string nome_imagem, std::string imagem_saida){//char 
 
     MPI_Finalize();
 
+    //fim da contagem de tempo da execucao
     gettimeofday(&end,NULL);
     tempo =( ((double) ( ((end.tv_sec * 1000000 + end.tv_usec)
                                 - (start.tv_sec * 1000000 + start.tv_usec))))/1000000);
 
+    // abre imagem, salva tempo de execucao, fecha arquivo
     char nome[100];
     sprintf(nome, "%s.out", imagem_saida.c_str());
     FILE *fp = fopen(nome, "w");
@@ -340,7 +390,7 @@ void calculaConRGB(unsigned char *img, unsigned char *img_saida, int i, int j, i
     img_saida[(i*width)+j+2] = (unsigned char)(media[2]/qtd);
 }
 
-void concorrenteColorido(std::string nome_imagem, std::string imagem_saida){
+void concorrenteColorido(std::string nome_imagem, std::string imagem_saida, int argc, char *argv[]){
     int node;
     int num_slaves;
 
@@ -349,7 +399,7 @@ void concorrenteColorido(std::string nome_imagem, std::string imagem_saida){
     double tempo=0.0;
     gettimeofday(&start,NULL);
 
-    MPI_Init(NULL, NULL); 
+    MPI_Init(&argc, &argv); 
     MPI_Comm_rank(MPI_COMM_WORLD, &node); 
     MPI_Comm_size(MPI_COMM_WORLD, &num_slaves);
     
@@ -466,11 +516,13 @@ void concorrenteColorido(std::string nome_imagem, std::string imagem_saida){
 
     MPI_Finalize();
 
-
+    //fim do tempo de execucao
     gettimeofday(&end,NULL);
     tempo =( ((double) ( ((end.tv_sec * 1000000 + end.tv_usec)
                                 - (start.tv_sec * 1000000 + start.tv_usec))))/1000000);
 
+
+    //abre arquivo, salva tempo de execucao, fechar arquivo
     char nome[100];
     sprintf(nome, "%s.out", imagem_saida.c_str());
     FILE *fp = fopen(nome, "w");
