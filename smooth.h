@@ -8,11 +8,12 @@
 #include <opencv/cxcore.h>
 #include <opencv/highgui.h>
 #include <sys/time.h>
-//#include <omp.h>
+#include <omp.h>
 //#include <ctime>
-//#include <mpi.h>
+#include <mpi.h>
 
-
+#define MASTER_TO_SLAVE_TAG 1
+#define SLAVE_TO_MASTER_TAG 10 
 #define PAI 0
 #define INICIO 0
 #define MEIO 1
